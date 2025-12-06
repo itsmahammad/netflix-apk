@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,34 +6,43 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #141414;
+    background: linear-gradient(to bottom, #000000 0%, #8b0000 100%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background: cover;
+    width: 100%;
+    height: 100vh;
     color: #fff;
+    padding: 50px 100px;
 }
+
 nav {
-    padding: 20px 50px;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
+
 nav ul {
     list-style: none;
     display: flex;
     gap: 20px;
 }
+
 nav ul li {
     font-size: 18px;
     font-weight: bold;
     transition: all 0.3s ease-in-out;
 }
+
 nav ul li:hover {
     cursor: pointer;
     transition: all 0.3s;
-    text-decoration: underline;
     padding: 5px 10px;
 
 }
+
 .nav-logo img {
     width: 120px;
 }
@@ -44,4 +53,76 @@ nav ul li:hover {
     border: none;
     outline: none;
     font-size: large;
+    padding-left: 5px;
+}
+
+.movie-card {
+    width: 220px;
+    background: #141414;
+    color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-image {
+    width: 100%;
+    height: auto;
+
+}
+
+.movie-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+}
+
+.movie-info {
+    padding: 12px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.details {
+    font-size: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
+
+.rating {
+    color: #ffcc00;
+}
+
+.summary {
+    font-size: 12px;
+    opacity: 0.8;
+    line-height: 1.4;
+    max-height: 70px;
+    overflow: hidden;
+}
+
+
+
+main {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
 }
