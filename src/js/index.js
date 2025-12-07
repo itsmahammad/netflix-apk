@@ -4,30 +4,36 @@ import { searchShow } from "./api.js";
 const cards = document.querySelector(".cards")
 
 function createCard(movie) {
-    return `
-    <div class="movie-card">
+    const card = document.createElement("div");
+    card.className = "movie-card";
+    card.innerHTML = `
         <div class="movie-image">
             <img src="${movie.image?.medium}" alt="${movie.name}">
         </div>
-
         <div class="movie-info">
             <h3 class="title">${movie.name}</h3>
-
             <div class="details">
-                <span class="rating">⭐ ${movie.rating?.average}</span>
+                <span class="rating">⭐ ${movie.rating?.average || "N/A"} </span>
                 <span class="runtime">${movie.runtime} min</span>
                 <span class="genres">${movie.genres.join(", ")}</span>
             </div>
-
         </div>
-    </div>
     `;
+
+    card.addEventListener("click", () => {
+        sessionStorage.setItem("selectedMovie", JSON.stringify(movie));
+        window.location.href = "detail.html";
+    });
+
+    return card;
 }
 
 
+
 function showMovies(movies) {
+    cards.innerHTML = "";
     movies.forEach(movie => {
-        cards.innerHTML += createCard(movie)
+        cards.appendChild(createCard(movie));
     });
 }
 

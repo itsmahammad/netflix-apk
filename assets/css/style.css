@@ -7,13 +7,7 @@
 body {
     font-family: Arial, sans-serif;
     background: black;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background: cover;
-    width: 100%;
-    min-height: 100vh;
-    color: #fff;
+    color: #ffff;
     padding: 50px 100px;
 }
 
@@ -136,3 +130,4 @@ main {
     flex-wrap: wrap;
     margin: auto;
 }
+
