@@ -9,6 +9,6 @@ details.innerHTML = `
         <p><strong>Rating:</strong> ${movie.rating?.average || "N/A"}</p>
         <p><strong>Runtime:</strong> ${movie.runtime || "?"} min</p>
         <p><strong>Summary:</strong> ${movie.summary}</p>
-        <a href="index.html">← Back to Home</a>
+        <a href="index.html">Back to Home</a>
     </div>
 `;

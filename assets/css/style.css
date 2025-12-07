@@ -17,12 +17,14 @@ nav {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 100px;
 }
 
 nav ul {
     list-style: none;
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 nav ul li {
@@ -130,4 +132,3 @@ main {
     flex-wrap: wrap;
     margin: auto;
 }
-
