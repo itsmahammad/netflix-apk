@@ -51,6 +51,7 @@ searchButton.addEventListener("click", async () => {
 
     genreNav.querySelectorAll("li").forEach(li => li.classList.remove("active"));
     genreNav.querySelector("[data-genre='all']").classList.add("active");
+    showLoadMore(false);
 });
 
 
@@ -81,10 +82,12 @@ genreNav.addEventListener("click", (e) => {
 function filterMovies(genre) {
     if (genre === "all") {
         showMovies(allMovies);
+        showLoadMore(true);
         return;
     }
     const filtered = allMovies.filter(movie => movie.genres.includes(genre));
     showMovies(filtered);
+    showLoadMore(false);
 }
 
 let page = 0;
@@ -98,6 +101,7 @@ async function loadMore() {
     if (page === 0) populateGenresNavbar(allMovies);
 
     page++;
+    showLoadMore(true);
 }
 
 const loadMoreButton = document.querySelector(".load-more")
@@ -105,3 +109,12 @@ const loadMoreButton = document.querySelector(".load-more")
 loadMoreButton.addEventListener("click", loadMore)
 
 loadMore();
+
+function showLoadMore(show = true) {
+    const loadMoreButton = document.querySelector(".load-more");
+    if (show) {
+        loadMoreButton.style.display = "block";
+    } else {
+        loadMoreButton.style.display = "none";
+    }
+}
