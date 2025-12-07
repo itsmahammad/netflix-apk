@@ -1,10 +1,11 @@
 import { getShows } from "./api.js";
+import { searchShow } from "./api.js";
 
 const cards = document.querySelector(".cards")
 
 function createCard(movie) {
     return `
-    <div class="movie-card" onclick="detail(${movie.id})">
+    <div class="movie-card">
         <div class="movie-image">
             <img src="${movie.image?.medium}" alt="${movie.name}">
         </div>
@@ -36,3 +37,23 @@ async function loadMovies() {
 }
 
 loadMovies()
+
+const searchInput = document.getElementById("search")
+const searchButton = document.getElementById("searchButton")
+
+searchButton.addEventListener("click", async () => {
+    const name = searchInput.value.trim().toLowerCase()
+    let searchResult = await searchShow(name)
+
+    if (!name) return;
+
+    cards.innerHTML = "";
+
+    showMovies(searchResult)
+})
+
+const homeButton = document.querySelector(".nav-buttons li");
+homeButton.addEventListener("click", () => {
+    cards.innerHTML = ""
+    loadMovies();
+});

@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #000000 0%, #8b0000 100%);
+    background: black;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -119,16 +119,6 @@ nav ul li:hover {
     color: #ffcc00;
 }
 
-.summary {
-    font-size: 12px;
-    opacity: 0.8;
-    line-height: 1.4;
-    max-height: 70px;
-    overflow: hidden;
-}
-
-
-
 main {
     width: 100%;
     margin-top: 50px;
@@ -142,6 +132,7 @@ main {
 .cards {
     display: flex;
     flex-direction: row;
-    gap: 50px;
+    gap: 25px;
     flex-wrap: wrap;
+    margin: auto;
 }
