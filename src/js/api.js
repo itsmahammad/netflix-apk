@@ -1,4 +1,3 @@
-import axios from "axios"
 
 const url = "https://api.tvmaze.com/shows"
 
@@ -7,7 +6,8 @@ export async function getShows(page = 0) {
     return response.json()
 }
 
-export async function name(query) {
-    const response = await axios.get(`https://api.tvmaze.com/search/shows?q=${query}`)
-    return response.data()
+export async function searchShow(name) {
+    const response = await axios.get(`https://api.tvmaze.com/search/shows?q=${name}`)
+    return response.data
 }
+
