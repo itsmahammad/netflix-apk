@@ -100,6 +100,8 @@ async function loadMore() {
     page++;
 }
 
-document.querySelector(".load-more").addEventListener("click", loadMore);
+const loadMoreButton = document.querySelector(".load-more")
+
+loadMoreButton.addEventListener("click", loadMore)
 
 loadMore();
