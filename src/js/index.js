@@ -37,15 +37,6 @@ function showMovies(movies) {
     });
 }
 
-async function loadMovies() {
-    const data = await getShows()
-    allMovies = data
-    showMovies(allMovies)
-    populateGenreNav(allMovies)
-}
-
-loadMovies()
-
 const searchInput = document.getElementById("search")
 const searchButton = document.getElementById("searchButton")
 
@@ -66,7 +57,7 @@ searchButton.addEventListener("click", async () => {
 
 const genreNav = document.getElementById("genre-nav");
 
-function populateGenreNav(movies) {
+function populateGenresNavbar(movies) {
     genreNav.innerHTML = `<li class="active" data-genre="all">Home</li>`;
     const genres = new Set();
     movies.forEach(movie => movie.genres.forEach(g => genres.add(g)));
@@ -74,7 +65,7 @@ function populateGenreNav(movies) {
     genres.forEach(genre => {
         const li = document.createElement("li");
         li.textContent = genre;
-        li.dataset.genre = genre;
+        li.setAttribute("data-genre", genre);
         genreNav.appendChild(li);
     });
 }
@@ -83,7 +74,7 @@ genreNav.addEventListener("click", (e) => {
     if (e.target.tagName !== "LI") return;
     genreNav.querySelectorAll("li").forEach(li => li.classList.remove("active"));
     e.target.classList.add("active");
-    const selectedGenre = e.target.dataset.genre;
+    const selectedGenre = e.target.getAttribute("data-genre");
     filterMovies(selectedGenre);
 });
 
@@ -95,3 +86,20 @@ function filterMovies(genre) {
     const filtered = allMovies.filter(movie => movie.genres.includes(genre));
     showMovies(filtered);
 }
+
+let page = 0;
+
+async function loadMore() {
+    const shows = await getShows(page);
+
+    allMovies = allMovies.concat(shows);
+    showMovies(allMovies);
+
+    if (page === 0) populateGenresNavbar(allMovies);
+
+    page++;
+}
+
+document.querySelector(".load-more").addEventListener("click", loadMore);
+
+loadMore();

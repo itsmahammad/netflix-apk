@@ -40,6 +40,10 @@ nav ul li:hover {
 
 }
 
+.active {
+    color: #E50914;
+}
+
 .nav-logo img {
     width: 120px;
 }
@@ -119,7 +123,7 @@ main {
     width: 100%;
     margin-top: 50px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: start;
     align-items: center;
     gap: 20px;
@@ -131,4 +135,20 @@ main {
     gap: 25px;
     flex-wrap: wrap;
     margin: auto;
+}
+
+.load-more {
+    color: #fff;
+    background-color: #141414;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #e50914;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.load-more:hover {
+    background-color: #e50914;
+    cursor: pointer;
 }
