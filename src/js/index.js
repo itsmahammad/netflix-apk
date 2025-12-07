@@ -50,7 +50,6 @@ searchButton.addEventListener("click", async () => {
     showMovies(searchResult);
 
     genreNav.querySelectorAll("li").forEach(li => li.classList.remove("active"));
-    genreNav.querySelector("[data-genre='all']").classList.add("active");
     showLoadMore(false);
 });
 
