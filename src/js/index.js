@@ -29,17 +29,19 @@ function createCard(movie) {
 }
 
 
-
+let allMovies = []
 function showMovies(movies) {
-    cards.innerHTML = "";
+    cards.innerHTML = ""
     movies.forEach(movie => {
-        cards.appendChild(createCard(movie));
+        cards.appendChild(createCard(movie))
     });
 }
 
 async function loadMovies() {
     const data = await getShows()
-    showMovies(data)
+    allMovies = data
+    showMovies(allMovies)
+    populateGenreNav(allMovies)
 }
 
 loadMovies()
@@ -49,17 +51,47 @@ const searchButton = document.getElementById("searchButton")
 
 searchButton.addEventListener("click", async () => {
     const name = searchInput.value.trim().toLowerCase()
-    let searchResult = await searchShow(name)
-
     if (!name) return;
 
+    const searchResult = await searchShow(name)
+
     cards.innerHTML = "";
+    showMovies(searchResult);
 
-    showMovies(searchResult)
-})
-
-const homeButton = document.querySelector(".nav-buttons li");
-homeButton.addEventListener("click", () => {
-    cards.innerHTML = ""
-    loadMovies();
+    genreNav.querySelectorAll("li").forEach(li => li.classList.remove("active"));
+    genreNav.querySelector("[data-genre='all']").classList.add("active");
 });
+
+
+
+const genreNav = document.getElementById("genre-nav");
+
+function populateGenreNav(movies) {
+    genreNav.innerHTML = `<li class="active" data-genre="all">Home</li>`;
+    const genres = new Set();
+    movies.forEach(movie => movie.genres.forEach(g => genres.add(g)));
+
+    genres.forEach(genre => {
+        const li = document.createElement("li");
+        li.textContent = genre;
+        li.dataset.genre = genre;
+        genreNav.appendChild(li);
+    });
+}
+
+genreNav.addEventListener("click", (e) => {
+    if (e.target.tagName !== "LI") return;
+    genreNav.querySelectorAll("li").forEach(li => li.classList.remove("active"));
+    e.target.classList.add("active");
+    const selectedGenre = e.target.dataset.genre;
+    filterMovies(selectedGenre);
+});
+
+function filterMovies(genre) {
+    if (genre === "all") {
+        showMovies(allMovies);
+        return;
+    }
+    const filtered = allMovies.filter(movie => movie.genres.includes(genre));
+    showMovies(filtered);
+}
