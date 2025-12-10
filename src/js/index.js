@@ -3,9 +3,11 @@ import { searchShow } from "./api.js";
 
 const cards = document.querySelector(".cards")
 
-function createCard(movie) {
+function createCard(movie, index = 0) {
     const card = document.createElement("div");
     card.className = "movie-card";
+
+    card.style.animationDelay = `${index * 40}ms`;
     card.innerHTML = `
         <div class="movie-image">
             <img src="${movie.image?.medium}" alt="${movie.name}">
@@ -32,25 +34,34 @@ function createCard(movie) {
 let allMovies = []
 function showMovies(movies) {
     cards.innerHTML = ""
-    movies.forEach(movie => {
-        cards.appendChild(createCard(movie))
+    movies.forEach((movie, i) => {
+        cards.appendChild(createCard(movie, i))
     });
 }
 
 const searchInput = document.getElementById("search")
 const searchButton = document.getElementById("searchButton")
 
-searchButton.addEventListener("click", async () => {
-    const name = searchInput.value.trim().toLowerCase()
+async function performSearch() {
+    const name = searchInput.value.trim().toLowerCase();
     if (!name) return;
 
-    const searchResult = await searchShow(name)
+    const searchResult = await searchShow(name);
 
     cards.innerHTML = "";
     showMovies(searchResult);
 
     genreNav.querySelectorAll("li").forEach(li => li.classList.remove("active"));
     showLoadMore(false);
+}
+
+searchButton.addEventListener("click", performSearch);
+
+
+searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        performSearch();
+    }
 });
 
 

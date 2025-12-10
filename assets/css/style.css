@@ -171,6 +171,48 @@ main {
     color: #ffcc00
 }
 
+
+.movie-card {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeUp .36s cubic-bezier(.2, .9, .3, 1) both;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+
+.nav-search input {
+    transition: box-shadow .18s, transform .18s, min-width .18s
+}
+
+.nav-search input:focus {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+    transform: translateY(-1px)
+}
+
+
+#genre-nav li {
+    transition: transform .14s ease, background .14s, color .14s
+}
+
+#genre-nav li:active {
+    transform: translateY(1px) scale(.995)
+}
+
+
+.nav-logo img {
+    transition: transform .4s ease
+}
+
+.nav-logo img:hover {
+    transform: scale(1.02)
+}
+
 .load-more {
     margin-top: 18px;
     background: transparent;
